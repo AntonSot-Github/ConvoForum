@@ -6,8 +6,15 @@
         <div class="space-x-6">
             <a href="#" class="text-gray-600 hover:text-blue-500">Темы</a>
             {{-- Пока заглушки, потом здесь будет проверка Auth --}}
-            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Вход</a>
-            <a href="#" class="text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Регистрация</a>
+            @if (isset($user))
+                <p>Hello, {{ $user }}</p>
+            @else
+                <a href="#"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Вход</a>
+                <a href="{{ route('user.create') }}"
+                    class="text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Registr</a>
+            @endif
+
         </div>
     </nav>
 </header>
