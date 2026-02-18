@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
@@ -15,8 +16,8 @@ class AuthController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        User::create($request->all());
-
+        $user = User::create($request->all());
+        Auth::login($user);
 
         return redirect()->route('home.index');
     }
