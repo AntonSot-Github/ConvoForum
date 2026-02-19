@@ -15,6 +15,7 @@
 
     <main class="container mx-auto mt-8 px-4 grow w-[60vw]">
 
+
         @include('partials.alert')
 
         @yield('content')

@@ -3,22 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 
 class AuthController extends Controller
 {
-    public function registr()
+    public function register()
     {
         return view('auth.registr');
     }
 
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->all());
+        $data = $request->validated();
+
+        if ($request->hasFile('avatar')) {
+            // Сохраняем файл в папку public/avatars
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = $path;
+        } else {
+            $data['avatar'] = 'avatars/av_def.png'; // Путь к дефолтной картинке
+        }
+
+        $user = User::create($data);
+
         Auth::login($user);
 
         return redirect()->route('home.index', compact('user'))->with('success', "$user->name, your account was created successfully");
+    }
+
+    public function logout(Request $request)
+    {
+                //Logout user(Delete user from session)
+        Auth::logout();
+
+        //Destroy current session to protect against reuse
+        $request->session()->invalidate();
+
+        //Update CSRF-token
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home.index');
     }
 }
