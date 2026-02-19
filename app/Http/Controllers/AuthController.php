@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 
@@ -19,6 +19,6 @@ class AuthController extends Controller
         $user = User::create($request->all());
         Auth::login($user);
 
-        return redirect()->route('home.index');
+        return redirect()->route('home.index', compact('user'))->with('success', "$user->name, your account was created successfully");
     }
 }
