@@ -7,7 +7,7 @@
     <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
         <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Login</h2>
 
-        <form action="/login" method="POST" class="flex flex-col space-y-5" enctype="multipart/form-data">
+        <form action="/login" method="POST" class="flex flex-col space-y-5">
             @csrf
 
             <div class="flex flex-col items-start">

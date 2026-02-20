@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -31,6 +32,24 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->route('home.index', compact('user'))->with('success', "$user->name, your account was created successfully");
+    }
+
+    public function loginPage()
+    {
+        return view('auth.login');
+    }
+
+    public function login(LoginUserRequest $request)
+    {
+        if(Auth::attempt($request->validated())){
+            $request->session()->regenerate();
+
+            $name = Auth::user()->name;
+
+            return redirect()->route('home.index')->with('success', "{$name}, welcome to Convoforum!");
+        };
+
+        return back()->with('error', 'Something wrong, try again please');
     }
 
     public function logout(Request $request)

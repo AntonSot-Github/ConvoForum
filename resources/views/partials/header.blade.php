@@ -62,7 +62,7 @@
                     </div>
                 </div>
             @else
-                <a href="#"
+                <a href="{{ route('user.login') }}"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Login</a>
                 <a href="{{ route('user.create') }}"
                     class="text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Register</a>
