@@ -35,7 +35,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-                //Logout user(Delete user from session)
+        //Logout user(Delete user from session)
         Auth::logout();
 
         //Destroy current session to protect against reuse

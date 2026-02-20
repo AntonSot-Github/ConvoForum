@@ -4,7 +4,7 @@
             ConvoForum
         </a>
         <div class="space-x-6 flex">
-            <a href="#" class="text-gray-600 hover:text-blue-500">Темы</a>
+            
 
             @if (isset(auth()->user()->name))
                 <div class="flex">
@@ -35,7 +35,7 @@
                                             class="w-8 h-8 rounded-full object-cover inline-block mx-auto mb-1">
                                         <p class="text-xs text-purple-500 text-center">{{ auth()->user()->email }}</p>
                                     </div>
-
+                                    {{-- Menu for user --}}
                                     <div class="my-1 border-t border-gray-100"></div>
                                     <a href="#"
                                         class="block px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-indigo-50">Profile</a>
@@ -63,7 +63,7 @@
                 </div>
             @else
                 <a href="#"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Вход</a>
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Login</a>
                 <a href="{{ route('user.create') }}"
                     class="text-blue-600 border border-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Register</a>
             @endif
