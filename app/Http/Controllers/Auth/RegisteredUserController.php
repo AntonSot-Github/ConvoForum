@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        
+        return redirect(route('home.index', absolute: false))->with('success', "$user->name, welcome to Convofum!");
     }
 }

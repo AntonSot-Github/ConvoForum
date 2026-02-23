@@ -2,7 +2,7 @@
     <div 
         x-data="{ show: true }" 
         x-show="show"
-        x-init="setTimeout(() => show = false, 3000)"
+        x-init="setTimeout(() => show = false, 5000)"
         class="mb-4 p-4 rounded bg-green-100 text-green-800 border border-green-300"
     >
         {{ session('success') }}
