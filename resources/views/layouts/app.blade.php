@@ -31,6 +31,10 @@
 
             <!-- Page Content -->
             <main>
+
+                {{-- Messages about success or error --}}
+                <x-flash-message />
+
                 {{ $slot }}
             </main>
         </div>
