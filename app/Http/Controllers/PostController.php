@@ -23,15 +23,24 @@ class PostController extends Controller
                 'title' => $request->new_topic_title,
                 'user_id' => Auth::id(),
             ]);
-
         } else {
             $topic = Topic::findOrFail($request->existing_topic_id);
+        }
+
+        // 2. Обработка картинки
+        $imagePath = null;
+
+        if ($request->hasFile('userPicture')) {
+
+            $imagePath = $request->file('userPicture')
+                ->store('post-images', 'public');
         }
 
         Post::create([
             'content' => $request->content,
             'user_id' => Auth::id(),
             'topic_id' => $topic->id,
+            'picture' => $imagePath,
         ]);
 
         return redirect()->route('home.index')

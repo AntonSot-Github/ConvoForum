@@ -10,7 +10,8 @@
         <div class="w-1/2 mx-auto ">
 
             <form action="{{ route('post.store') }}" method="POST"
-                class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden" enctype="multipart/form-data">
+                class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden"
+                enctype="multipart/form-data">
                 <h2 class="text-center bg-slate-50 border-b border-slate-100 px-6 py-4 mb-3">Your post</h2>
                 @csrf
                 <div>
@@ -42,7 +43,7 @@
                                     Select existing topic
                                 </label>
 
-                                
+
                                 <select name="existing_topic_id" id="existing_topic_select"
                                     class="mt-2 w-full border rounded p-2 opacity-30" disabled>
                                     <option value="" selected>Choose topic</option>
@@ -53,12 +54,16 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
                         </fieldset>
-
                     </div>
 
+                    {{-- Post picture --}}
+                    <div class="flex flex-col mx-auto mb-4 px-4">
+                        <label for="userPicture"><i>You can add a picture</i></label>
+                        <input type="file" name="userPicture">
+                    </div>
+
+                    {{-- Post text --}}
                     <div class="flex flex-col mx-auto mb-4 px-4">
                         <label for="content"><i>Your message</i></label>
                         <textarea name="content" id="content" cols="30" rows="5" placeholder="Your text..."></textarea>

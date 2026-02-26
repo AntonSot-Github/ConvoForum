@@ -10,7 +10,16 @@
         @forelse ($posts as $post)
             <div
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+
+                {{-- Topic of post --}}
                 <h2 class="bg-slate-50 border-b border-slate-100 px-6 py-4">{{ $post->topic->title }}</h2>
+
+                {{-- Post picture --}}
+                @if ($post->picture)
+                    <div>
+                        <img cclass="mt-3 rounded max-w-full" src="{{ asset('storage/' . $post->picture) }}" alt="img">
+                    </div>
+                @endif
 
                 {{-- Post-text --}}
                 <div class="mb-3 p-6">
@@ -20,10 +29,10 @@
                 {{-- User's name and publication date --}}
                 <div
                     class="flex flex-row justify-between items-center px-6 py-4 bg-slate-50/50 border-t border-slate-50 text-sm">
-
                     <p>{{ $post->user->name }}</p>
                     <time>{{ $post->created_at }}</time>
                 </div>
+                
             </div>
         @empty
             <div class="text-center py-12">
