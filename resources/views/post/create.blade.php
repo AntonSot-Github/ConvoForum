@@ -10,14 +10,12 @@
         <div class="w-1/2 mx-auto ">
 
             <form action="{{ route('post.store') }}" method="POST"
-                class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden">
+                class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden" enctype="multipart/form-data">
                 <h2 class="text-center bg-slate-50 border-b border-slate-100 px-6 py-4 mb-3">Your post</h2>
                 @csrf
                 <div>
 
-                    <div>
-                        <input type="number" name="user_id" value="{{ Auth::user()->id }}" hidden>
-                    </div>
+
 
                     {{-- Conversation topic --}}
                     <div class="mb-4 px-4">
