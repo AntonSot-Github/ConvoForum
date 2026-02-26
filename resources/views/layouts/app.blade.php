@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased min-h-screen">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             
 
@@ -30,12 +30,15 @@
             @include('layouts.navigation')
 
             <!-- Page Content -->
-            <main>
+            <main class="container w-full md:w-3/4 mx-auto ">
 
                 {{-- Messages about success or error --}}
                 <x-flash-message />
 
                 {{ $slot }}
+
+                @yield('content')
+
             </main>
         </div>
     </body>
