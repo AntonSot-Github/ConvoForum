@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\Topic;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -15,7 +16,7 @@ class PostController extends Controller
         return view('post.create', compact('topics'));
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         if ($request->topic_mode === 'new') {
 
@@ -36,12 +37,7 @@ class PostController extends Controller
                 ->store('post-images', 'public');
         }
 
-        Post::create([
-            'content' => $request->content,
-            'user_id' => Auth::id(),
-            'topic_id' => $topic->id,
-            'picture' => $imagePath,
-        ]);
+        Post::create($request->validated());
 
         return redirect()->route('home.index')
             ->with('success', 'Post created successfully!');
