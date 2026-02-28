@@ -6,7 +6,17 @@
     </x-slot>
 
 
-    <div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+    <div class="max-w-4xl mx-auto px-4 space-y-6 pb-6">
+
+        @auth
+            <div class="flex justify-center">
+                <a href="{{ route('post.create') }}"
+                    class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
+                    + Add new post
+                </a>
+            </div>
+        @endauth
+
         @forelse ($posts as $post)
             <div
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
@@ -61,14 +71,10 @@
             </div>
         @endforelse
 
-        @auth
-            <div class="flex justify-center pt-4">
-                <a href="{{ route('post.create') }}"
-                    class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
-                    + Add new post
-                </a>
-            </div>
-        @endauth
+        <x-slot name="footer">
+            
+        </x-slot>
+
     </div>
 
 </x-app-layout>
