@@ -4,7 +4,7 @@
             <a href="{{ route('home.index') }}">{{ __('Convoforum') }}</a>
         </h2>
     </x-slot>
-    
+
 
     <div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
         @forelse ($posts as $post)
@@ -16,8 +16,29 @@
 
                 {{-- Post picture --}}
                 @if ($post->picture)
-                    <div>
-                        <img cclass="mt-3 rounded max-w-full" src="{{ asset('storage/' . $post->picture) }}" alt="img">
+                    <div class="relative mt-3">
+                        <input type="checkbox" id="zoom-{{ $post->id }}" class="hidden peer">
+
+                        <label for="zoom-{{ $post->id }}" class="cursor-zoom-in block">
+                            <img src="{{ asset('storage/' . $post->picture) }}"
+                                class="max-w-full hover:opacity-90 transition-opacity" alt="img">
+                        </label>
+
+                        <div
+                            class="fixed inset-0 z-50 hidden peer-checked:flex items-center justify-center bg-black/90 p-4">
+
+                            <label for="zoom-{{ $post->id }}"
+                                class="absolute top-5 right-5 text-white bg-white/20 hover:bg-white/40 rounded-full p-3 cursor-pointer transition-colors">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </label>
+
+                            <img src="{{ asset('storage/' . $post->picture) }}"
+                                class="max-w-[95vw] max-h-[95vh] object-contain shadow-2xl rounded-lg"
+                                alt="fullscreen-img">
+                        </div>
                     </div>
                 @endif
 
@@ -32,7 +53,7 @@
                     <p>{{ $post->user->name }}</p>
                     <time>{{ $post->created_at }}</time>
                 </div>
-                
+
             </div>
         @empty
             <div class="text-center py-12">
