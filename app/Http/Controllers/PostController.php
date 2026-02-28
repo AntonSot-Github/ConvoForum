@@ -18,6 +18,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        // Определяем тему
         if ($request->topic_mode === 'new') {
 
             $topic = Topic::create([
@@ -25,21 +26,28 @@ class PostController extends Controller
                 'user_id' => Auth::id(),
             ]);
         } else {
+
             $topic = Topic::findOrFail($request->existing_topic_id);
         }
 
-        // 2. Обработка картинки
+        // Обработка изображения
         $imagePath = null;
 
         if ($request->hasFile('userPicture')) {
-
             $imagePath = $request->file('userPicture')
                 ->store('post-images', 'public');
         }
 
-        Post::create($request->validated());
+        // Создание поста
+        Post::create([
+            'content' => $request->content,
+            'user_id' => Auth::id(),
+            'topic_id' => $topic->id,
+            'picture' => $imagePath,
+        ]);
 
-        return redirect()->route('home.index')
+        return redirect()
+            ->route('home.index')
             ->with('success', 'Post created successfully!');
     }
 }

@@ -9,6 +9,18 @@
     @section('content')
         <div class="w-1/2 mx-auto ">
 
+            {{-- Showing errors when a form is not accepted --}}
+            @if ($errors->any())
+                <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- Form for post --}}
             <form action="{{ route('post.store') }}" method="POST"
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden"
                 enctype="multipart/form-data">

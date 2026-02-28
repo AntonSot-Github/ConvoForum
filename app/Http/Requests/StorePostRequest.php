@@ -31,4 +31,24 @@ class StorePostRequest extends FormRequest
             'existing_topic_id' => ['required_if:topic_mode,existing', 'exists:topics,id'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+
+            'content.required' => 'Message cannot be empty.',
+
+            'userPicture.image' => 'The uploaded file must be an image.',
+
+            'userPicture.max' => 'Image must not exceed 2MB.',
+
+            'topic_mode.required' => 'Please select a topic option.',
+
+            'new_topic_title.required_if' => 'Please enter a title for the new topic.',
+
+            'existing_topic_id.required_if' => 'Please select an existing topic.',
+
+            'existing_topic_id.exists' => 'Selected topic does not exist.',
+        ];
+    }
 }
