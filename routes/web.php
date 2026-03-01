@@ -9,6 +9,7 @@ Route::get('/', [ForumController::class, 'index'])->name('home.index');
 
 Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
 Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

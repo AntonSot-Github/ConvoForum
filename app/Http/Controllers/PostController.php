@@ -16,6 +16,11 @@ class PostController extends Controller
         return view('post.create', compact('topics'));
     }
 
+/*     public function show(Post $post)
+    {
+        return view()
+    }
+ */
     public function store(StorePostRequest $request)
     {
         // Определяем тему
@@ -49,5 +54,12 @@ class PostController extends Controller
         return redirect()
             ->route('home.index')
             ->with('success', 'Post created successfully!');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('home.index');
     }
 }
