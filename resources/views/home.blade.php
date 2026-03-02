@@ -6,7 +6,7 @@
     </x-slot>
 
 
-    <div class="max-w-4xl mx-auto px-4 space-y-6 pb-6">
+    <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
 
         @auth
             <div class="flex justify-center">
@@ -60,8 +60,9 @@
                 {{-- User's name and publication date --}}
                 <div
                     class="flex flex-row justify-between items-center px-6 py-4 bg-slate-50/50 border-t border-slate-50 text-sm">
+
                     {{-- If the user is autor of the post, show the edition menu --}}
-                    @if ($post->user->name === Auth::user()->name)
+                    @if (isset(Auth::user()->id) && $post->user->id === Auth::user()->id)
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
@@ -83,23 +84,24 @@
 
                             <x-slot name="content">
 
-                                <x-dropdown-link :href="route('profile.edit')">
-
+                                <x-dropdown-link :href="route('post.show', [$post])">
+                                    Edit post
 
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    <form method="POST" action="{{ route('post.delete', [$post]) }}">
-                                        @csrf
-                                        @method('DELETE')
+                                <form method="POST" action="{{ route('post.delete', $post) }}">
+                                    @csrf
+                                    @method('DELETE')
 
-                                        <button>Delete post</button>
-                                    </form>
-                                </x-dropdown-link>
+                                    <x-dropdown-link href="#"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                        Delete post
+                                    </x-dropdown-link>
+                                </form>
 
 
                             </x-slot>
                         </x-dropdown>
-                    {{-- Else show just post author's name --}}
+                        {{-- Else show just post author's name --}}
                     @else
                         <p>{{ $post->user->name }}</p>
                     @endif

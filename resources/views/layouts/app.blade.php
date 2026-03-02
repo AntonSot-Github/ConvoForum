@@ -16,20 +16,23 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased min-h-screen flex flex-col">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+<body class="font-sans antialiased h-screen flex flex-col">
+    <div class="min-h-screen dark:bg-gray-900 flex flex-col">
 
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white dark:bg-gray-800 shadow">
+            <header class="w-full bg-white dark:bg-gray-800 shadow flex flex-col mb-3">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
+                </div>
+                <div>
+                    @include('layouts.navigation')
                 </div>
             </header>
         @endisset
 
-        @include('layouts.navigation')
+        
 
         <!-- Page Content -->
         <main class="container w-full md:w-3/4 mx-auto grow">
@@ -46,8 +49,8 @@
         @isset($footer)
             <footer class="w-full bg-white dark:bg-gray-800 shadow py-4 flex flex-col">
 
-                <div class="w-full">
-                    <h2 class="text-center">&copy; {{ date('Y') }} ConvoForum</h2>
+                <div class="mx-auto px-4">
+                    <h2 >&copy; {{ date('Y') }} ConvoForum</h2>
                 </div>
 
                 {{ $footer }}

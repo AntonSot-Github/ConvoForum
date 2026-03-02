@@ -7,6 +7,7 @@
     </x-slot>
 
     @section('content')
+
         <div class="w-1/2 mx-auto ">
 
             {{-- Showing errors when a form is not accepted --}}
@@ -21,13 +22,14 @@
             @endif
 
             {{-- Form for post --}}
-            <form action="{{ route('post.store') }}" method="POST"
+            <form action="{{ route('post.update', [$post]) }}" method="POST"
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm transition-shadow overflow-hidden"
                 enctype="multipart/form-data">
-                <h2 class="text-center bg-slate-50 border-b border-slate-100 px-6 py-4 mb-3">Your post</h2>
+                <h2 class="text-center bg-slate-50 border-b border-slate-100 px-6 py-4 mb-3">Edit post</h2>
                 @csrf
-                <div>
+                @method('PUT')
 
+                <div>
                     {{-- Conversation topic --}}
                     <div class="mb-4 px-4">
                         <fieldset>
@@ -37,28 +39,29 @@
                             {{-- CREATE NEW TOPIC --}}
                             <div class="mb-3">
                                 <label class="flex items-center gap-2">
-                                    <input type="radio" name="topic_mode" value="new" checked>
+                                    <input type="radio" name="topic_mode" value="new">
                                     Create new topic
                                 </label>
 
                                 <input type="text" name="new_topic_title" id="new_topic_input"
-                                    class="mt-2 w-full border rounded p-2" placeholder="New topic title...">
+                                    class="mt-2 w-full border rounded p-2 opacity-30" placeholder="New topic title..."
+                                    disabled>
                             </div>
 
 
                             {{-- SELECT EXISTING --}}
                             <div>
                                 <label class="flex items-center gap-2">
-                                    <input type="radio" name="topic_mode" value="existing">
+                                    <input type="radio" name="topic_mode" value="existing" checked>
                                     Select existing topic
                                 </label>
 
 
                                 <select name="existing_topic_id" id="existing_topic_select"
-                                    class="mt-2 w-full border rounded p-2 opacity-30" disabled>
-                                    <option value="" selected>Choose topic</option>
+                                    class="mt-2 w-full border rounded p-2 ">
                                     @foreach ($topics as $topic)
-                                        <option value="{{ $topic->id }}">
+                                        <option value="{{ $topic->id }}"
+                                            {{ old('existing_topic_id', $post->topic_id) == $topic->id ? 'selected' : '' }}>
                                             {{ $topic->title }}
                                         </option>
                                     @endforeach
@@ -68,15 +71,22 @@
                     </div>
 
                     {{-- Post picture --}}
+                    @if ($post->picture)
+                        <div class="mb-3 p-2">
+                            <p class="text-sm text-gray-500">Current image:</p>
+                            <img src="{{ asset('storage/' . $post->picture) }}" class="max-w-xs mx-auto">
+                        </div>
+                    @endif
+
                     <div class="flex flex-col mx-auto mb-4 px-4">
-                        <label for="userPicture"><i>You can add a picture</i></label>
+                        <label for="userPicture"><i>Replace image (optional)</i></label>
                         <input type="file" name="userPicture">
                     </div>
 
                     {{-- Post text --}}
                     <div class="flex flex-col mx-auto mb-4 px-4">
-                        <label for="content"><i>Your message</i></label>
-                        <textarea name="content" id="content" cols="30" rows="5" placeholder="Your text..."></textarea>
+                        <label for="content"><i>Edit your message</i></label>
+                        <textarea name="content" id="content" cols="30" rows="5" placeholder="Your text...">{{ $post->content }}</textarea>
                     </div>
 
                     <div class="w-full flex justify-center mb-5">
@@ -120,8 +130,11 @@
 
             });
         </script>
+
+
     @endsection
 
 
+    <x-slot name="footer"></x-slot>
 
 </x-app-layout>
