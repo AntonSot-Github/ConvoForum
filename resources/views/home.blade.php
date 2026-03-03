@@ -117,9 +117,7 @@
             </div>
         @endforelse
 
-        <x-slot name="footer">
-
-        </x-slot>
+        <x-slot name="footer"></x-slot>
 
     </div>
 

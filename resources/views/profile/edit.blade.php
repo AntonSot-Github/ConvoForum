@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
+            <a href="{{ route('home.index') }}">{{ __('Convoforum') }}</a>
         </h2>
     </x-slot>
 
@@ -26,4 +26,5 @@
             </div>
         </div>
     </div>
+    <x-slot name="footer"></x-slot>
 </x-app-layout>
