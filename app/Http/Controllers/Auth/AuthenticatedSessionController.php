@@ -27,8 +27,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect()->intended(route('home.index', absolute: false));
+        return redirect()->intended(route('home.index', absolute: false))->with('success', "$user->name, you have login succesfully");
     }
 
     /**
@@ -42,6 +43,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('home.index');
+        
+
+        return redirect()->route('home.index');
     }
 }

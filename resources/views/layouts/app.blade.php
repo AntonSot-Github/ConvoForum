@@ -19,7 +19,6 @@
 <body class="font-sans antialiased h-screen flex flex-col">
     <div class="min-h-screen dark:bg-gray-900 flex flex-col">
 
-
         <!-- Page Heading -->
         @isset($header)
             <header class="w-full bg-white dark:bg-gray-800 shadow flex flex-col mb-3">
@@ -38,9 +37,11 @@
         <main class="container w-full md:w-3/4 mx-auto grow">
 
             {{-- Messages about success or error --}}
-            <x-flash-message />
+            <x-flash-message/>
 
             {{ $slot }}
+
+            
 
             @yield('content')
 
