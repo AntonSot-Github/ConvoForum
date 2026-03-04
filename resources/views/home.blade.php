@@ -113,7 +113,7 @@
             </div>
         @empty
             <div class="text-center py-12">
-                <h3 class="text-xl text-slate-500 italic">Sorry, there are no posts yet</h3>
+                <h3 class="text-xl text-slate-500 italic">Sorry, there are no any posts yet</h3>
             </div>
         @endforelse
 
