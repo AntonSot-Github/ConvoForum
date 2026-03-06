@@ -6,6 +6,19 @@
     </x-slot>
 
     <div class="py-12">
+        {{-- Validation errors --}}
+        @if ($errors->any())
+            <div class="w-1/3 mx-auto mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded"
+                x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-center">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        {{-- Profile edition --}}
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             {{-- Avatar --}}
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">

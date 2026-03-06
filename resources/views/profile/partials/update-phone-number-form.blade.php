@@ -12,9 +12,10 @@
         <div>
             <x-input-label for="update_phone_number" :value="__('Phone number')" />
             <x-text-input id="update_phone_number" 
-                name="phone" type="tel" 
+                name="phone" type="tel" inputmode="tel"
                 class="mt-1 block w-full" 
-                {{-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" --}}
+                pattern="[0-9+\-\(\) ]{7,20}"
+                placeholder="123-456-789"
                 value="{{ old('phone', auth()->user()->phone) }}" />
             
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\PhoneUpdateRequest;
 //use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,12 +40,8 @@ class ProfileController extends Controller
     }
 
     //Update the user's phone number
-    public function updatePhone(Request $request)
+    public function updatePhone(PhoneUpdateRequest $request)
     {
-        $request->validate([
-            'phone' => ['nullable', 'string', 'max:20'],
-        ]);
-
         $request->user()->update([
             'phone' => $request->phone,
         ]);
