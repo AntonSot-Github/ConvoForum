@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->default(0);
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('avatars/av_def.png')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

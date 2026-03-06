@@ -49,6 +49,22 @@ class ProfileController extends Controller
         return redirect()->route('profile.edit')->with('success', 'Phone updated');
     }
 
+    //Update the user's avatar picture
+    public function updateAvatar(Request $request)
+    {
+        $imagePath = null;
+        if ($request->hasFile('avatar')) {
+            $imagePath = $request->file('avatar')
+                ->store('avatars', 'public');
+        }
+
+        $request->user()->update([
+            'avatar' => $imagePath,
+        ]);
+
+        return redirect()->route('profile.edit')->with('success', 'Avatar updated');
+    }
+
     /**
      * Delete the user's account.
      */
