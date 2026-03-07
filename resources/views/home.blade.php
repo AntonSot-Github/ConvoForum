@@ -63,12 +63,13 @@
 
                     {{-- If the user is autor of the post, show the edition menu --}}
                     @if (isset(Auth::user()->id) && $post->user->id === Auth::user()->id)
-                        <x-dropdown align="right" width="48">
+                        <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div>
-                                        <p>{{ $post->user->name }}</p>
+                                    <div class="flex flex-row">                                        
+                                        <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . $post->user->avatar) }}" alt="Avatar-img">
+                                        <p class="my-auto text-lg">{{ $post->user->name }}</p>
                                     </div>
 
                                     <div class="ms-1">
