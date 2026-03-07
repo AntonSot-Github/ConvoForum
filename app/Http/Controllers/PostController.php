@@ -17,10 +17,10 @@ class PostController extends Controller
         return view('post.create', compact('topics'));
     }
 
-    public function show(Post $post)
+    public function edit(Post $post)
     {
         $topics = Topic::all('title', 'id');
-        return view('post.show', compact('post', 'topics'));
+        return view('post.edit', compact('post', 'topics'));
     }
 
     public function update(StorePostRequest $request, Post $post)

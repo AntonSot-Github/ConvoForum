@@ -74,13 +74,13 @@
                     @if ($post->picture)
                         <div class="mb-3 p-2">
                             <p class="text-sm text-gray-500">Current image:</p>
-                            <img src="{{ asset('storage/' . $post->picture) }}" class="max-w-xs mx-auto">
+                            <img id="topicImg_preview" src="{{ asset('storage/' . $post->picture) }}" class="max-w-xs mx-auto">
                         </div>
                     @endif
 
                     <div class="flex flex-col mx-auto mb-4 px-4">
-                        <label for="userPicture"><i>Replace image (optional)</i></label>
-                        <input type="file" name="userPicture">
+                        <label for="userPicture_input"><i>Replace image (optional)</i></label>
+                        <input id="userPicture_input" type="file" name="userPicture">
                     </div>
 
                     {{-- Post text --}}
@@ -102,8 +102,9 @@
 
         </div>
 
-        {{-- JS for topic-selecting --}}
+
         <script>
+            /* JS for topic-selecting */
             document.addEventListener('DOMContentLoaded', function() {
 
                 const radios = document.querySelectorAll('input[name="topic_mode"]');
@@ -127,6 +128,23 @@
 
                     });
                 });
+
+            });
+            /* JS for topic image preview */
+            document.getElementById('userPicture_input').addEventListener('change', function(e) {
+
+                const file = e.target.files[0];
+
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image');
+                    return;
+                }
+
+                if (!file) return;
+
+                const preview = document.getElementById('topicImg_preview');
+
+                preview.src = URL.createObjectURL(file);
 
             });
         </script>

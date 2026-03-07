@@ -84,7 +84,7 @@
 
                             <x-slot name="content">
 
-                                <x-dropdown-link :href="route('post.show', [$post])">
+                                <x-dropdown-link :href="route('post.edit', [$post])">
                                     Edit post
 
                                 </x-dropdown-link>

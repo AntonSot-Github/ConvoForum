@@ -10,7 +10,7 @@ Route::get('/', [ForumController::class, 'index'])->name('home.index');
 Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
 Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/{post}', [PostController::class, 'edit'])->name('post.edit');
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.update');
 
 Route::middleware('auth')->group(function () {
