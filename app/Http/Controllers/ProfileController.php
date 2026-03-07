@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\PhoneUpdateRequest;
+use App\Http\Requests\AvatarUpdateRequest;
 //use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -50,17 +52,26 @@ class ProfileController extends Controller
     }
 
     //Update the user's avatar picture
-    public function updateAvatar(Request $request)
+    public function updateAvatar(AvatarUpdateRequest $request)
     {
-        $imagePath = null;
+        $user = $request->user();
+
         if ($request->hasFile('avatar')) {
+
+            //Delete the old user's avatar if it isn't default
+            if ($user->avatar && $user->avatar !== 'avatars/av_def.png') {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            //Save new avatar-image
             $imagePath = $request->file('avatar')
                 ->store('avatars', 'public');
-        }
 
-        $request->user()->update([
-            'avatar' => $imagePath,
-        ]);
+            //Update DB
+            $user->update([
+                'avatar' => $imagePath,
+            ]);
+        }
 
         return redirect()->route('profile.edit')->with('success', 'Avatar updated');
     }

@@ -31,17 +31,17 @@
             </header>
         @endisset
 
-        
+
 
         <!-- Page Content -->
         <main class="container w-full md:w-3/4 mx-auto grow">
 
             {{-- Messages about success or error --}}
-            <x-flash-message/>
+            <x-flash-message />
 
             {{ $slot }}
 
-            
+
 
             @yield('content')
 
@@ -51,7 +51,7 @@
             <footer class="w-full bg-white dark:bg-gray-800 shadow py-4 flex flex-col">
 
                 <div class="mx-auto px-4">
-                    <h2 >&copy; {{ date('Y') }} ConvoForum</h2>
+                    <h2>&copy; {{ date('Y') }} ConvoForum</h2>
                 </div>
 
                 {{ $footer }}
@@ -60,5 +60,23 @@
         @endisset
     </div>
 </body>
+<script>
+    document.getElementById('avatar_input').addEventListener('change', function(e) {
+
+        const file = e.target.files[0];
+
+        if (!file.type.startsWith('image/')) {
+            alert('Please select an image');
+            return;
+        }
+
+        if (!file) return;
+
+        const preview = document.getElementById('avatar_preview');
+
+        preview.src = URL.createObjectURL(file);
+
+    });
+</script>
 
 </html>
