@@ -7,18 +7,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ForumController::class, 'index'])->name('home.index');
 
-Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
-Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
-Route::get('/posts/{post}', [PostController::class, 'edit'])->name('post.edit');
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('post.update');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/profile/phone', [ProfileController::class, 'updatePhone'])->name('profile.update.phone');
-    Route::patch('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::prefix('/posts')->group(function () {
+    Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
+    Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.delete');
+    Route::get('/{post}', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/{post}', [PostController::class, 'update'])->name('post.update');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'verified'])->prefix('/profile')->group(function () {
+    Route::get('', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/phone', [ProfileController::class, 'updatePhone'])->name('profile.update.phone');
+    Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
+    Route::delete('', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
