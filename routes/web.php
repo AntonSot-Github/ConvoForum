@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ForumController::class, 'index'])->name('home.index');
 
-Route::prefix('/posts')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
     Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
     Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.delete');
@@ -15,7 +15,7 @@ Route::prefix('/posts')->group(function () {
     Route::put('/{post}', [PostController::class, 'update'])->name('post.update');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('/profile')->group(function () {
+Route::middleware('auth')->prefix('/profile')->group(function () {
     Route::get('', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/phone', [ProfileController::class, 'updatePhone'])->name('profile.update.phone');
