@@ -1,3 +1,9 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{ route('home.index') }}">{{ __('Convoforum') }}</a>
+        </h2>
+    </x-slot>
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
@@ -29,3 +35,5 @@
         </form>
     </div>
 </x-guest-layout>
+    <x-slot name="footer"></x-slot>
+</x-app-layout>

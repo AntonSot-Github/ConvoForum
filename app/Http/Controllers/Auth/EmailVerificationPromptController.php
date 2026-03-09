@@ -14,6 +14,7 @@ class EmailVerificationPromptController extends Controller
      */
     public function __invoke(Request $request): RedirectResponse|View
     {
+        $request->user()->sendEmailVerificationNotification();
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended(route('home.index', absolute: false))
                         ->with('success', 'Email verified successfully!')

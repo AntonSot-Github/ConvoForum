@@ -62,52 +62,60 @@
                     class="flex flex-row justify-between items-center px-6 py-4 bg-slate-50/50 border-t border-slate-50 text-sm">
 
                     {{-- If the user is autor of the post, show the edition menu --}}
-                    @if (isset(Auth::user()->id) && $post->user->id === Auth::user()->id)
-                        <x-dropdown align="left" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div class="flex flex-row">                                        
-                                        <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . $post->user->avatar) }}" alt="Avatar-img">
-                                        <p class="my-auto text-lg">{{ $post->user->name }}</p>
-                                    </div>
+                    @auth
+                        @if($post->user_id === auth()->id() || Auth::user()->isAdmin())
+                            <x-dropdown align="left" width="48">
+                                <x-slot name="trigger">
+                                    <button
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                        <div @class(['flex flex-row', 'text-green-500' => $post->user->isAdmin()])>
+                                            <img class="size-8 me-2 rounded-full"
+                                                src="{{ asset('storage/' . $post->user->avatar) }}" alt="Avatar-img">
 
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
+                                            @if ($post->user->isAdmin())
+                                                <p class=" text-green-500 my-auto me-2">*Admin</p>
+                                            @endif
 
-                            <x-slot name="content">
+                                            <p class="my-auto text-lg">{{ $post->user->name }}</p>
+                                        </div>
 
-                                <x-dropdown-link :href="route('post.edit', [$post])">
-                                    Edit post
+                                        <div class="ms-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
 
-                                </x-dropdown-link>
-                                <form method="POST" action="{{ route('post.delete', $post) }}">
-                                    @csrf
-                                    @method('DELETE')
+                                <x-slot name="content">
 
-                                    <x-dropdown-link href="#"
-                                        onclick="event.preventDefault(); this.closest('form').submit();">
-                                        Delete post
+                                    <x-dropdown-link :href="route('post.edit', [$post])">
+                                        Edit post
+
                                     </x-dropdown-link>
-                                </form>
+                                    <form method="POST" action="{{ route('post.delete', $post) }}">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <x-dropdown-link href="#"
+                                            onclick="event.preventDefault(); this.closest('form').submit();">
+                                            Delete post
+                                        </x-dropdown-link>
+                                    </form>
 
 
-                            </x-slot>
-                        </x-dropdown>
-                        {{-- Else show just post author's name --}}
-                    @else
-                        <p>{{ $post->user->name }}</p>
-                    @endif
+                                </x-slot>
+                            </x-dropdown>
+                            {{-- Else show just post author's name --}}
+                        @else
+                            <p>{{ $post->user->name }}</p>
+                        @endif
+                    @endauth
 
-                    <time>{{ $post->created_at }}</time>
+                    <time>{{ $post->created_at->format('d M Y H:i') }}</time>
                 </div>
 
 

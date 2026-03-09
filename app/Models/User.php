@@ -13,6 +13,14 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
 
+    const ROLE_USER = 0;
+    const ROLE_ADMIN = 1;
+
+    public function isAdmin():bool 
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
