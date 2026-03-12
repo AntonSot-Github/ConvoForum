@@ -129,8 +129,8 @@
         <x-slot name="footer">
             <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
                 <p>Topics: {{ $topics->count() }}</p>
-                <p>pagination</p>
-                <p>Posts: {{ $posts->count() }}</p>
+                <div>{{ $posts->links() }}</div>
+                <p>Posts: {{ $posts->total() }}</p>
             </div>
         </x-slot>
 
