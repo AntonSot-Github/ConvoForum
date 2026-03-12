@@ -126,7 +126,13 @@
             </div>
         @endforelse
 
-        <x-slot name="footer"></x-slot>
+        <x-slot name="footer">
+            <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
+                <p>Topics: {{ $topics->count() }}</p>
+                <p>pagination</p>
+                <p>Posts: {{ $posts->count() }}</p>
+            </div>
+        </x-slot>
 
     </div>
 

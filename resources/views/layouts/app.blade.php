@@ -48,13 +48,16 @@
         </main>
 
         @isset($footer)
-            <footer class="w-full bg-white dark:bg-gray-800 shadow py-4 flex flex-col">
+            <footer class="w-full bg-white dark:bg-gray-800 shadow flex flex-col">
 
-                <div class="mx-auto px-4">
+
+                {{ $footer }}
+
+                <div class="mx-auto px-4 py-3">
                     <h2>&copy; {{ date('Y') }} ConvoForum</h2>
                 </div>
 
-                {{ $footer }}
+
 
             </footer>
         @endisset
