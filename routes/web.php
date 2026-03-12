@@ -3,9 +3,12 @@
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ForumController::class, 'index'])->name('home.index');
+
+Route::get('/topics', [TopicController::class, 'index'])->name('topic.index');
 
 Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
     Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
