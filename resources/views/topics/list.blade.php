@@ -10,8 +10,9 @@
         @forelse ($topics as $topic)
             <div class="flex flex-row mb-2 justify-between">
                 <div class="flex flex-row ">
-                    <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . $topic->user->avatar) }}" alt="ava">
-                    <a class="my-auto" href="#">{{ $topic->title }}</a>
+                    <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . $topic->user->avatar) }}"
+                        alt="ava">
+                    <a class="my-auto" href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
                 </div>
                 <div>
                     <p>{{ $topic->created_at->format('d M Y') }}</p>
@@ -24,6 +25,11 @@
 
     </div>
 
-    <x-slot name="footer"></x-slot>
+    <x-slot name="footer">
+        <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
+            <p>Topics: {{ $topics->count() }}</p>
+            <div>{{ $topics->links() }}</div>
+            <p>Posts: {{ $posts->count() }}</p>
+        </div>
+    </x-slot>
 </x-app-layout>
-

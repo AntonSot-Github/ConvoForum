@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ForumController::class, 'index'])->name('home.index');
 
-Route::get('/topics', [TopicController::class, 'index'])->name('topic.index');
+Route::get('/topics', [TopicController::class, 'index'])->name('topics.list');
+Route::get('/{topic}/show', [TopicController::class, 'show'])->name('topic.show');
 
 Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
     Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');

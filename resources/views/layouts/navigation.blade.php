@@ -1,28 +1,37 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 ">
-    @if (isset(Auth::user()->name))
-        <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
 
-                    <!-- Navigation Links -->
-                    <div class="hidden sm:-my-px sm:flex">
-                        <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
-                            {{ __('Main') }}
+    <!-- Primary Navigation Menu -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex justify-between">
+
+            <div class="flex">
+                <!-- Navigation Links -->
+                <div class="hidden sm:-my-px sm:flex">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+                        {{ __('Main') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('topics.list')" :active="request()->routeIs('topics.list')">
+                        {{ __('Topics menu') }}
+                    </x-nav-link>
+
+                    @auth
+                        <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                            {{ __('My profile') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('topic.index')" :active="request()->routeIs('topic.index')">
-                            {{ __('Topics menu') }}
+                    @endauth
+
+                    @if ($topic = request()->route('topic'))
+                        <x-nav-link :href="route('topic.show', $topic)" :active="request()->routeIs('topic.show')">
+                            {{ __("Posts on $topic->title") }}
                         </x-nav-link>
-
-                        @auth
-                            <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
-                                {{ __('My profile') }}
-                            </x-nav-link>
-                        @endauth
-                    </div>
-
+                    @endif
                 </div>
 
+            </div>
+
+            @if (isset(Auth::user()->name))
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
 
@@ -85,63 +94,63 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+        </div>
+    </div>
+
+    <!-- Responsive Navigation Menu -->
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+                {{ __('Main') }}
+            </x-responsive-nav-link>
         </div>
 
-        <!-- Responsive Navigation Menu -->
-        <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
-                    {{ __('Main') }}
+        <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('profile.edit')">
+                    {{ __('Profile') }}
                 </x-responsive-nav-link>
-            </div>
 
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
-                    </x-responsive-nav-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
-                </div>
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
             </div>
         </div>
-    @else
-        <div class="flex justify-end max-w-[85vw]">
+    </div>
+@else
+    <div class="flex justify-end max-w-[85vw]">
 
 
-            @if (Route::has('login'))
-                <a href="{{ route('login') }}"
-                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
-                    Log in
-                </a>
-            @endif
+        @if (Route::has('login'))
+            <a href="{{ route('login') }}"
+                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
+                Log in
+            </a>
+        @endif
 
 
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}"
-                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                    Register
-                </a>
-            @endif
+        @if (Route::has('register'))
+            <a href="{{ route('register') }}"
+                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                Register
+            </a>
+        @endif
 
 
-        </div>
+    </div>
     @endif
 
 

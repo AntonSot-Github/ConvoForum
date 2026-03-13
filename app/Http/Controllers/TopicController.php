@@ -13,6 +13,14 @@ class TopicController extends Controller
     {
         $topics = Topic::with('user')->latest()->paginate(25);
         $posts = Post::with(['user', 'topic'])->get();
-        return view('topics.index', compact('topics', 'posts'));
+
+        return view('topics.list', compact('topics', 'posts'));
+    }
+
+    public function show(Topic $topic)
+    {
+        
+        $posts = Post::with(['user'])->where('topic_id', '=', $topic->id)->get();
+        return view('topics.topic-show-posts', compact('topic', 'posts'));
     }
 }

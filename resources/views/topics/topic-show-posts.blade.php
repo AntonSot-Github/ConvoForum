@@ -5,19 +5,7 @@
         </h2>
     </x-slot>
 
-
     <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
-
-        {{-- If the user is autorized he can create a new post --}}
-        @auth
-            <div class="flex justify-center">
-                <a href="{{ route('post.create') }}"
-                    class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
-                    + Add new post
-                </a>
-            </div>
-        @endauth
-
         @forelse ($posts as $post)
             <div
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -123,19 +111,9 @@
 
             </div>
         @empty
-            <div class="text-center py-12">
-                <h3 class="text-xl text-slate-500 italic">Sorry, there are no any posts yet</h3>
+            <div class="flex grow justify-center mt-10">
+                <h2 class="text-2xl">---- There are no any posts on {{ $topic->title }} yet ----</h2>
             </div>
         @endforelse
-
-        <x-slot name="footer">
-            <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
-                <p>Topics: {{ $topics->count() }}</p>
-                <div>{{ $posts->links() }}</div>
-                <p>Posts: {{ $posts->total() }}</p>
-            </div>
-        </x-slot>
-
     </div>
-
 </x-app-layout>
