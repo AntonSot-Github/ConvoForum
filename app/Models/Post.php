@@ -13,6 +13,27 @@ class Post extends Model
         'picture',
     ];
 
+    protected static function booted()
+    {
+        // Увеличиваем счетчик при создании поста
+        static::created(function ($post) {
+            $post->topic()->increment('posts_count');
+        });
+
+        // Уменьшаем счетчик при удалении поста
+        static::deleted(function ($post) {
+            $topic = $post->topic;
+
+            if ($topic) {
+                $topic->decrement('posts_count');
+
+                // Твоя логика: если постов 0 — удаляем тему
+                if ($topic->posts_count <= 0) {
+                    $topic->delete();
+                }
+            }
+        });
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
