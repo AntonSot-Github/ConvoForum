@@ -14,13 +14,13 @@ class PostController extends Controller
     public function createPost()
     {
         $topics = Topic::all('title', 'id');
-        return view('post.create', compact('topics'));
+        return view('posts.create', compact('topics'));
     }
 
     public function edit(Post $post)
     {
         $topics = Topic::all('title', 'id');
-        return view('post.edit', compact('post', 'topics'));
+        return view('posts.edit', compact('post', 'topics'));
     }
 
     public function update(StorePostRequest $request, Post $post)

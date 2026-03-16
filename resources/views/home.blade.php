@@ -63,7 +63,7 @@
                 <div
                     class="flex flex-row justify-between items-center px-6 py-4 bg-slate-50/50 border-t border-slate-50 text-sm">
 
-                    {{-- If the user is autor of the post, show the edition menu --}}
+                    {{-- If the user is author of the post, show the edition menu --}}
                     @auth
                         @if ($post->user_id === auth()->id() || Auth::user()->isAdmin())
                             <x-dropdown align="left" width="48">
@@ -128,14 +128,16 @@
             </div>
         @endforelse
 
-        <x-slot name="footer">
-            <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
-                <p>Topics: {{ $topics->count() }}</p>
-                <div>{{ $posts->links() }}</div>
-                <p>Posts: {{ $posts->total() }}</p>
-            </div>
-        </x-slot>
+
 
     </div>
+
+    <x-slot name="footer">
+        <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
+            <p>Topics: {{ $topics->total() }}</p>
+            <div>{{ $posts->links() }}</div>
+            <p>Posts: {{ $posts->total() }}</p>
+        </div>
+    </x-slot>
 
 </x-app-layout>

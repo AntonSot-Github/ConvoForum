@@ -22,6 +22,12 @@
                         </x-nav-link>
                     @endauth
 
+                    @if (Auth::user()->isAdmin())
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('List of users') }}
+                        </x-nav-link>
+                    @endif
+
                     @if ($topic = request()->route('topic'))
                         <x-nav-link :href="route('topic.show', $topic)" :active="request()->routeIs('topic.show')">
                             {{ __("Posts on $topic->title") }}

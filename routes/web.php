@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -10,6 +11,8 @@ Route::get('/', [ForumController::class, 'index'])->name('home.index');
 
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.list');
 Route::get('/{topic}/show', [TopicController::class, 'show'])->name('topic.show');
+Route::middleware('auth')->get('/users', [UserController::class, 'index'])->name('users.index');
+Route::middleware('auth')->delete('users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
     Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');

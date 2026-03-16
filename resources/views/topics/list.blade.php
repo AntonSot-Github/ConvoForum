@@ -28,9 +28,9 @@
 
     <x-slot name="footer">
         <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
-            <p>Topics: {{ $topics->count() }}</p>
+            <p>Topics: {{ $topics->total() }}</p>
             <div>{{ $topics->links() }}</div>
-            <p>Posts: {{ $posts->count() }}</p>
+            <p>Posts: {{ $postsCount }}</p>
         </div>
     </x-slot>
 </x-app-layout>
