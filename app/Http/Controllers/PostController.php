@@ -25,7 +25,10 @@ class PostController extends Controller
 
     public function update(StorePostRequest $request, Post $post)
     {
-        if ($post->user_id !== Auth::id()) {
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if ($post->user_id !== Auth::id() && !$user()->isAdmin()) {
             abort(403);
         }
 
@@ -101,10 +104,16 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if ($post->user_id !== Auth::id()) {
+        /*         if ($post->user_id !== Auth::id()) {
+            abort(403);
+        } */
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($post->user_id !== Auth::id() || !$user()->isAdmin()) {
             abort(403);
         }
-        
+
         $post->delete();
 
         return redirect()->route('home.index');

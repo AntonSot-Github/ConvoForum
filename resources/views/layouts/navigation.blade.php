@@ -18,11 +18,12 @@
 
                     @auth
                         <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
-                            {{ __('My profile') }}
+                            {{ __('Profile') }}
                         </x-nav-link>
                     @endauth
 
-                    @if (Auth::user()->isAdmin())
+                    {{-- If user is autorized and the user is admin, show this menu tab --}}
+                    @if (Auth::user() && Auth::user()->isAdmin())
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('List of users') }}
                         </x-nav-link>

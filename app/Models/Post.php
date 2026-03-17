@@ -15,25 +15,32 @@ class Post extends Model
 
     protected static function booted()
     {
-        // Увеличиваем счетчик при создании поста
+        // Increment the counter when creating a post. 
         static::created(function ($post) {
             $post->topic()->increment('posts_count');
         });
 
-        // Уменьшаем счетчик при удалении поста
+        // Decrease counter when post was deleted
         static::deleted(function ($post) {
             $topic = $post->topic;
 
             if ($topic) {
                 $topic->decrement('posts_count');
 
-                // Твоя логика: если постов 0 — удаляем тему
+                // If deleted post in topic was last, delete it
                 if ($topic->posts_count <= 0) {
                     $topic->delete();
                 }
             }
         });
     }
+
+    //Accessor for views - $user->name || Deleted user
+    public function getAuthorNameAttribute()
+    {
+        return $this->user ? $this->user->name : 'Deleted user';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

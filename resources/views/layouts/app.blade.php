@@ -53,7 +53,7 @@
 
                 {{ $footer }}
 
-                <div class="mx-auto px-4 py-3">
+                <div class="mx-auto px-4 py-4">
                     <h2>&copy; {{ date('Y') }} ConvoForum</h2>
                 </div>
 

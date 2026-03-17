@@ -70,15 +70,12 @@
                                 <x-slot name="trigger">
                                     <button
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                        <div @class(['flex flex-row', 'text-green-500' => $post->user->isAdmin()])>
-                                            <img class="size-8 me-2 rounded-full"
-                                                src="{{ asset('storage/' . $post->user->avatar) }}" alt="Avatar-img">
+                                        <div @class(['flex flex-row', 'text-green-500' => Auth::user()->isAdmin()])>
+                                            <img class="size-6 me-2 rounded-full"
+                                                src="{{ asset('storage/' . ($post->user->avatar ?? 'avatars/av_def.png')) }}"
+                                                alt="Avatar-img">
 
-                                            @if ($post->user->isAdmin())
-                                                <p class=" text-green-500 my-auto me-2">*Admin</p>
-                                            @endif
-
-                                            <p class="my-auto text-lg">{{ $post->user->name }}</p>
+                                            <p class="my-auto text-lg">{{ $post->author_name }}</p>
                                         </div>
 
                                         <div class="ms-1">
@@ -113,7 +110,13 @@
                             </x-dropdown>
                             {{-- Else show just post author's name --}}
                         @else
-                            <p>{{ $post->user->name }}</p>
+                            {{-- src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}" --}}
+                            <div class="flex flex-row">
+                                <img class="size-6 me-2 rounded-full"
+                                    src="{{ asset('storage/' . ($post->user->avatar ?? 'avatars/av_def.png')) }}"
+                                    alt="Avatar-img">
+                                <p class="my-auto">{{ $post->author_name }}</p>
+                            </div>
                         @endif
                     @endauth
 

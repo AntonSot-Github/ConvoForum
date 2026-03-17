@@ -40,15 +40,19 @@
                                 </form>
                             </td>
                         </tr>
-
-
                     @empty
+                        <h2>There are no any users yet</h2>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-        @endforelse
-    </div>
+        
 
+        
+    </div>
+    <x-slot name="footer">
+        <div class="mx-auto py-3">{{ $users->links() }}</div>
+    </x-slot>
 
 
 

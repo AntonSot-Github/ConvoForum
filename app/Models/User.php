@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
+/**
+ * @method bool isAdmin()
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -16,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const ROLE_USER = 0;
     const ROLE_ADMIN = 1;
 
-    public function isAdmin():bool 
+    public function isAdmin(): bool 
     {
         return $this->role === self::ROLE_ADMIN;
     }

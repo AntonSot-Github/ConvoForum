@@ -10,7 +10,8 @@
         @forelse ($topics as $topic)
             <div class="flex flex-row mb-2 justify-between">
                 <div class="flex flex-row ">
-                    <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . $topic->user->avatar) }}"
+                                                {{-- src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}" --}}
+                    <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}"
                         alt="ava">
                     <a class="my-auto me-2" href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
                     <p class="my-auto">({{ $topic->posts_count }} posts)</p>
