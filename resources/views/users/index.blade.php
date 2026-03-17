@@ -22,7 +22,7 @@
                                 <div class="flex flex-row justify-start">
                                     <img class="size-5 me-3 rounded-full my-auto"
                                         src="{{ asset('storage/' . $user->avatar) }}" alt="ava">
-                                    <p class="my-auto">{{ $user->name }}</p>
+                                    <a href="{{ route('users.show', $user)}}" class="my-auto">{{ $user->name }}</a>
                                 </div>
 
                             </td>

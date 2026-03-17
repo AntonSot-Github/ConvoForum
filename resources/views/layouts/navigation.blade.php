@@ -34,6 +34,18 @@
                             {{ __("Posts on $topic->title") }}
                         </x-nav-link>
                     @endif
+
+                    @auth
+                        @if (auth()->user()->isAdmin() && request()->route('user'))
+                            @php
+                                $user = request()->route('user');
+                            @endphp
+
+                            <x-nav-link :href="route('users.show', $user)" :active="request()->routeIs('users.show')">
+                                {{ $user->name }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
 
             </div>
