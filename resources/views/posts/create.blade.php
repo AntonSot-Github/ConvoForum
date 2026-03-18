@@ -69,8 +69,11 @@
 
                     {{-- Post picture --}}
                     <div class="flex flex-col mx-auto mb-4 px-4">
-                        <label for="userPicture"><i>You can add a picture</i></label>
-                        <input type="file" name="userPicture">
+
+                        <x-input-label for="userPicture_input" id="userPicture_label" :value="__('You can add a picture')" />
+                        <x-text-input id="userPicture_input" accept="image/*" name="userPicture" type="file"
+                            class="mt-1 block w-1/3" />
+
                     </div>
 
                     {{-- Post text --}}
@@ -116,6 +119,42 @@
                         }
 
                     });
+                });
+
+
+                /* Preview post-picture */
+                let userPicture_input = document.getElementById('userPicture_input');
+                let userPicture_label = document.getElementById('userPicture_label');
+                userPicture_input.addEventListener('change', function(e) {
+
+                    const file = e.target.files[0];
+
+                    //Check if the file is selected.
+                    if (!file) return;
+
+                    //Check file type
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select an image');
+                        userPicture_input.value = ''; // Reset selected file
+                        return;
+                    }
+
+                    //Check if the image alredy has created
+                    let previewPicture = document.getElementById('postPicture_preview');
+
+                    if (!previewPicture) {
+                        userPicture_label.insertAdjacentHTML("afterend",
+                            "<img id='postPicture_preview' class='mx-auto mt-2 rounded-lg border w-auto h-auto shadow-sm' alt='Preview'>"
+                        );
+                        previewPicture = document.getElementById('postPicture_preview');
+                        
+                    }
+
+                    userPicture_label.textContent = 'You can choose another picture';
+
+                    // Setting a temporary file path in the browser
+                    previewPicture.src = URL.createObjectURL(file);
+
                 });
 
             });

@@ -64,6 +64,7 @@
     </div>
 </body>
 <script>
+    /* Preview avatar before sending on server */
     document.getElementById('avatar_input').addEventListener('change', function(e) {
 
         const file = e.target.files[0];
@@ -80,6 +81,8 @@
         preview.src = URL.createObjectURL(file);
 
     });
+
+    
 </script>
 
 </html>

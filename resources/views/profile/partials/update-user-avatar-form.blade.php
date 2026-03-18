@@ -19,7 +19,7 @@
                 @endif
             </div>
             <x-input-label for="avatar_input" :value="__('Avatar')" />
-            <x-text-input id="avatar_input" accept="image/*" name="avatar" type="file" class="mt-1 block w-full" />
+            <x-text-input id="avatar_input" accept="image/*" name="avatar" type="file" class="mt-1 block w-min" />
 
         </div>
 

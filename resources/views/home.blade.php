@@ -136,7 +136,7 @@
     </div>
 
     <x-slot name="footer">
-        <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
+        <div class=" border-t-2 border-indigo-500 flex flex-row justify-around px-4 py-3">
             <p>Topics: {{ $topics->total() }}</p>
             <div>{{ $posts->links() }}</div>
             <p>Posts: {{ $posts->total() }}</p>
