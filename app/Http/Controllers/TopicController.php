@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
 
 class TopicController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $topics = Topic::with('user')->latest()->paginate(25);
+        $query = Topic::with('user')->latest();
+
+        if ($request->search) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $topics = $query->paginate(25)->withQueryString();
         $postsCount = Post::count();
         return view('topics.list', compact('topics', 'postsCount'));
     }

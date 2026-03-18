@@ -18,6 +18,18 @@
             </div>
         @endauth
 
+        {{-- Search post--}}
+        <div class="w-1/2 mx-auto">
+            <form method="GET" action="{{ route('home.index') }}" class="mb-4 flex flex-row">
+                <input type="text" name="search" placeholder="Search topics..."
+                    class="border rounded px-3 py-2 w-full me-1">
+                <x-button color="slate" value="{{ request('search') }}">
+                    Search
+                </x-button>
+            </form>
+        </div>
+
+        {{-- Posts --}}
         @forelse ($posts as $post)
             <div
                 class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -136,7 +148,7 @@
 
     <x-slot name="footer">
         <div class=" border-t-2 border-indigo-500 flex flex-row justify-around px-4 py-3">
-            <p>Topics: {{ $topics->total() }}</p>
+            <p>Topics: {{ $topicsCount }}</p>
             <div>{{ $posts->links() }}</div>
             <p>Posts: {{ $posts->total() }}</p>
         </div>
