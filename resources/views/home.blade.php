@@ -110,7 +110,6 @@
                             </x-dropdown>
                             {{-- Else show just post author's name --}}
                         @else
-                            {{-- src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}" --}}
                             <div class="flex flex-row">
                                 <img class="size-6 me-2 rounded-full"
                                     src="{{ asset('storage/' . ($post->user->avatar ?? 'avatars/av_def.png')) }}"

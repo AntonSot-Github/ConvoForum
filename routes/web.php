@@ -9,19 +9,15 @@ use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ForumController::class, 'index'])->name('home.index');
-
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.list');
 Route::get('/{topic}/show', [TopicController::class, 'show'])->name('topic.show');
-Route::middleware('auth')->get('/users', [UserController::class, 'index'])->name('users.index');
-Route::middleware('auth')->delete('users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-Route::middleware('auth')->get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 
-Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
-    Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
-    Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
-    Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.delete');
-    Route::get('/{post}', [PostController::class, 'edit'])->name('post.edit');
-    Route::put('/{post}', [PostController::class, 'update'])->name('post.update');
+Route::middleware('auth')->delete('/{topic}/delete', [TopicController::class, 'destroy'])->name('topic.destroy');
+
+Route::middleware('auth')->prefix('/users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 Route::middleware('auth')->prefix('/profile')->group(function () {
@@ -30,6 +26,14 @@ Route::middleware('auth')->prefix('/profile')->group(function () {
     Route::patch('/phone', [ProfileController::class, 'updatePhone'])->name('profile.update.phone');
     Route::patch('/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
     Route::delete('', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->prefix('/posts')->group(function () {
+    Route::get('/post/create', [PostController::class, 'createPost'])->name('post.create');
+    Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/{post}', [PostController::class, 'destroy'])->name('post.delete');
+    Route::get('/{post}', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/{post}', [PostController::class, 'update'])->name('post.update');
 });
 
 require __DIR__ . '/auth.php';

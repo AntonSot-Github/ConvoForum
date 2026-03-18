@@ -28,7 +28,7 @@ class PostController extends Controller
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        if ($post->user_id !== Auth::id() && !$user()->isAdmin()) {
+        if ($post->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 

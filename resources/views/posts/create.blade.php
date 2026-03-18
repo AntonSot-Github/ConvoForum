@@ -95,9 +95,11 @@
 
         </div>
 
-        {{-- JS for topic-selecting --}}
+        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
+
+                /* ---------------------- JS for topic-selecting ---------------------- */
 
                 const radios = document.querySelectorAll('input[name="topic_mode"]');
                 const newInput = document.getElementById('new_topic_input');
@@ -122,7 +124,7 @@
                 });
 
 
-                /* Preview post-picture */
+                /*---------------------- Preview post-picture ----------------------*/
                 let userPicture_input = document.getElementById('userPicture_input');
                 let userPicture_label = document.getElementById('userPicture_label');
                 userPicture_input.addEventListener('change', function(e) {
@@ -150,6 +152,7 @@
                         
                     }
 
+                    //Change the label text after receiving the image file
                     userPicture_label.textContent = 'You can choose another picture';
 
                     // Setting a temporary file path in the browser

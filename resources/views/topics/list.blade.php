@@ -5,26 +5,61 @@
         </h2>
     </x-slot>
 
-    <div class="w-1/3 mx-auto">
+    <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
+        <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
 
-        @forelse ($topics as $topic)
-            <div class="flex flex-row mb-2 justify-between">
-                <div class="flex flex-row ">
-                                                {{-- src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}" --}}
-                    <img class="size-8 me-2 rounded-full" src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}"
-                        alt="ava">
-                    <a class="my-auto me-2" href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
-                    <p class="my-auto">({{ $topic->posts_count }} posts)</p>
-                </div>
-                <div>
-                    <p>{{ $topic->created_at->format('d M Y') }}</p>
-                </div>
+            <table class="w-full text-sm text-left text-slate-500 flex flex-col">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200  w-full">
+                    <tr class="grid {{ auth()->user()?->isAdmin() ? 'grid-cols-3' : 'grid-cols-2' }} grid-rows-1 py-3 px-4">
+                        <th class="justify-self-start ">Topic title</th>
+                        <th class=" {{ auth()->user()?->isAdmin() ? 'justify-self-center' : 'justify-self-end' }}">Creation date</th>
 
-            </div>
-        @empty
-            <p>There are no any topics yet</p>
-        @endforelse
+                        @if (Auth::user() && Auth::user()->isAdmin())
+                            <th class="justify-self-end">Action</th>
+                        @endif
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
 
+            @forelse ($topics as $topic)
+
+                    <tr class="bg-white transition-colors grid {{ auth()->user()?->isAdmin() ? 'grid-cols-3' : 'grid-cols-2' }} grid-rows-1 py-2 px-4 align-content-center">
+                            <td class="justify-self-start my-auto">
+                                <div class="flex flex-row ">
+                                    <img class="size-8 me-2 rounded-full"
+                                        src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}" alt="ava">
+                                    <a class="my-auto me-2" href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
+                                    <p class="my-auto whitespace-nowrap">({{ $topic->posts_count }} mes.)</p>
+                                </div>
+                            </td>
+
+                            <td class="{{ auth()->user()?->isAdmin() ? 'justify-self-center' : 'justify-self-end' }} my-auto">
+                                <p>{{ $topic->created_at->format('d M Y') }}</p>
+                            </td>
+
+                            @if (Auth::user() && Auth::user()->isAdmin())
+                                <td class="justify-self-end my-auto">
+                                <form action="{{ route('topic.destroy', $topic) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <x-button color="red" onclick="return confirm('Deleting this topic will remove all its posts. Continue?')">
+                                        Delete topic
+                                    </x-button>
+                                </form>
+                            </td>
+                            @endif
+
+                        </tr>
+
+            @empty
+                <p>There are no any topics yet</p>
+            @endforelse
+
+                </tbody>
+            </table>
+
+        </div>
     </div>
 
     <x-slot name="footer">
