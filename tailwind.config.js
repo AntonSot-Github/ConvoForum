@@ -12,7 +12,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                // Default font has been changed
+                sans: ['"Times New Roman"', 'Times', 'serif', ...defaultTheme.fontFamily.sans],
             },
         },
     },

@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        /* Это увеличит масштаб шрифта для всего сайта сразу */
+        font-size: 110%; 
+    }
+}
