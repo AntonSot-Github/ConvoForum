@@ -8,7 +8,7 @@
     <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
 
         {{-- Search form --}}
-        <div class="w-1/2 mx-auto">
+        <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 xl:w-2/5 mx-auto">
             <form method="GET" action="{{ route('topics.list') }}" class="mb-4 flex flex-row">
                 <input type="text" name="search" placeholder="Search topics..."
                     class="border rounded px-3 py-2 w-full me-1">
@@ -46,7 +46,7 @@
                                         alt="ava">
                                     <a class="my-auto me-2"
                                         href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
-                                    <p class="my-auto whitespace-nowrap">({{ $topic->posts_count }} mes.)</p>
+                                    <p class="hidden sm:inline my-auto whitespace-nowrap">({{ $topic->posts_count }} mes.)</p>
                                 </div>
                             </td>
 

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="p-6">
         {{-- Validation errors --}}
         @if ($errors->any())
             <div class="w-1/3 mx-auto mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded"

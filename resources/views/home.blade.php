@@ -1,10 +1,10 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
             <a href="{{ route('home.index') }}">{{ __('ConvoForum') }}</a>
         </h2>
     </x-slot>
-
 
     <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
 
@@ -19,7 +19,7 @@
         @endauth
 
         {{-- Search post --}}
-        <div class="w-1/2 mx-auto">
+        <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 mx-auto">
             <form method="GET" action="{{ route('home.index') }}" class="mb-4 flex flex-row">
                 <input type="text" name="search" placeholder="Search topics..."
                     class="border rounded px-3 py-2 w-full me-1">
@@ -141,15 +141,13 @@
             </div>
         @endforelse
 
-
-
     </div>
 
     <x-slot name="footer">
         <div class=" border-t-2 border-indigo-500 flex flex-row justify-around px-4 py-3">
-            <p>Topics: {{ $topicsCount }}</p>
+            <p class="hidden md:inline">Topics: {{ $topicsCount }}</p>
             <div>{{ $posts->links() }}</div>
-            <p>Posts: {{ $posts->total() }}</p>
+            <p class="hidden md:inline">Posts: {{ $posts->total() }}</p>
         </div>
     </x-slot>
 
