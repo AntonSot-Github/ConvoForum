@@ -19,12 +19,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-xl antialiased h-screen flex flex-col">
-    <div class="min-h-screen dark:bg-gray-900 flex flex-col">
+<body class="font-sans text-xl antialiased min-h-screen flex flex-col bg-gradient-to-br from-slate-50 to-slate-100 text-slate-800">
+    <div class="min-h-screen dark:bg-gray-900 flex flex-col ">
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="w-full bg-white dark:bg-gray-800 shadow flex flex-col mb-3">
+            <header class="w-full bg-white/80 border-b border-slate-200">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -37,7 +37,7 @@
 
 
         <!-- Page Content -->
-        <main class="w-full md:w-3/4 mx-auto grow">
+        <main class="w-full md:w-3/4 mx-auto grow mt-3">
 
             {{-- Messages about success or error --}}
             <x-flash-message />
@@ -49,12 +49,12 @@
         </main>
 
         @isset($footer)
-            <footer class="w-full bg-white dark:bg-gray-800 shadow flex flex-col">
+            <footer class="w-full bg-gradient-to-br from-slate-50 to-slate-100 text-slate-800 shadow flex flex-col">
 
 
                 {{ $footer }}
 
-                <div class="mx-auto px-4 py-4">
+                <div class="mx-auto px-4 py-4 ">
                     <h2>&copy; {{ date('Y') }} ConvoForum</h2>
                 </div>
 

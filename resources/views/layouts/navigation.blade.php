@@ -1,11 +1,11 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 ">
+<nav x-data="{ open: false }" class="text-slate-600 hover:text-indigo-600 transition-colors">
 
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto ">
+    <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
 
         <div class="grid grid-row-1 grid-cols-2">
 
-            <div>
+            <div class="my-auto">
                 <div class="hidden sm:flex">
                     <!-- Navigation Links -->
                     <div class="hidden sm:-my-px sm:flex">

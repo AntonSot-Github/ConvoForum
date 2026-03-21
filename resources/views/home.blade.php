@@ -12,7 +12,7 @@
         @auth
             <div class="flex justify-center">
                 <a href="{{ route('post.create') }}"
-                    class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
+                    class="bg-indigo-600 text-white px-6 py-2 rounded-full font-medium hover:bg-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg active:scale-95">
                     + Add new post
                 </a>
             </div>
@@ -22,7 +22,7 @@
         <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 mx-auto">
             <form method="GET" action="{{ route('home.index') }}" class="mb-4 flex flex-row">
                 <input type="text" name="search" placeholder="Search topics..."
-                    class="border rounded px-3 py-2 w-full me-1">
+                    class="border border-slate-200 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition me-1">
                 <x-button color="slate" value="{{ request('search') }}">
                     Search
                 </x-button>
@@ -32,10 +32,12 @@
         {{-- Posts --}}
         @forelse ($posts as $post)
             <div
-                class="flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                class="flex flex-col bg-white/80 border-2 rounded-2xl shadow-sm">
 
                 {{-- Topic of post --}}
-                <h2 class="bg-slate-50 border-b border-slate-100 px-6 py-4 rounded-t-2xl">{{ $post->topic->title }}
+                <h2
+                    class="bg-slate-100 border-b border-slate-100 px-6 py-4 rounded-t-2xl font-bold text-slate-800 tracking-tight">
+                    {{ $post->topic->title }}
                 </h2>
 
                 {{-- Post picture --}}
@@ -68,12 +70,12 @@
 
                 {{-- Post-text --}}
                 <div class="mb-3 p-6">
-                    <pre class="text-slate-600 leading-relaxed">{{ $post->content }}</pre>
+                    <pre class="text-slate-700 leading-relaxed whitespace-pre-wrap">{{ $post->content }}</pre>
                 </div>
 
                 {{-- User's name and publication date --}}
                 <div
-                    class="flex flex-row justify-between items-center px-6 py-4 bg-slate-50/50 border-t border-slate-50 text-sm">
+                    class="flex flex-row justify-between items-center px-6 py-4 bg-slate-100 border-t border-slate-50 text-sm">
 
                     {{-- If the user is author of the post or user is admin, show the edition menu --}}
                     @if (Auth::user() && ($post->user_id === auth()->id() || Auth::user()->isAdmin()))
@@ -144,10 +146,10 @@
     </div>
 
     <x-slot name="footer">
-        <div class=" border-t-2 border-indigo-500 flex flex-row justify-around px-4 py-3">
-            <p class="hidden md:inline">Topics: {{ $topicsCount }}</p>
-            <div>{{ $posts->links() }}</div>
-            <p class="hidden md:inline">Posts: {{ $posts->total() }}</p>
+        <div class="border-t border-slate-200 bg-white/70 backdrop-blur flex justify-around px-4 py-3 border-b">
+            <p class="hidden md:inline my-auto">Topics: {{ $topicsCount }}</p>
+            <div class="my-auto">{{ $posts->links() }}</div>
+            <p class="hidden md:inline my-auto">Posts: {{ $posts->total() }}</p>
         </div>
     </x-slot>
 

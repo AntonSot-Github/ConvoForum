@@ -104,13 +104,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        /*         if ($post->user_id !== Auth::id()) {
-            abort(403);
-        } */
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
-
-        if ($post->user_id !== Auth::id() || !$user()->isAdmin()) {
+        if ($post->user_id !== Auth::id() && !$user->isAdmin()) {
             abort(403);
         }
 
