@@ -32,7 +32,7 @@
         {{-- Posts --}}
         @forelse ($posts as $post)
             <div
-                class="flex flex-col bg-white/80 border-2 rounded-2xl shadow-sm">
+                class="flex flex-col bg-white/80 border-2 rounded-2xl shadow-lg">
 
                 {{-- Topic of post --}}
                 <h2
@@ -146,10 +146,12 @@
     </div>
 
     <x-slot name="footer">
-        <div class="border-t border-slate-200 bg-white/70 backdrop-blur flex justify-around px-4 py-3 border-b">
-            <p class="hidden md:inline my-auto">Topics: {{ $topicsCount }}</p>
-            <div class="my-auto">{{ $posts->links() }}</div>
-            <p class="hidden md:inline my-auto">Posts: {{ $posts->total() }}</p>
+        <div class="w-full bg-white/70 border-b border-t">
+            <div class="max-w-7xl mx-auto  border-slate-200  backdrop-blur flex justify-between px-4 py-3">
+                <p class="hidden md:inline my-auto">Topics: {{ $topicsCount }}</p>
+                <div class="my-auto">{{ $posts->links() }}</div>
+                <p class="hidden md:inline my-auto">Posts: {{ $posts->total() }}</p>
+            </div>
         </div>
     </x-slot>
 

@@ -1,11 +1,11 @@
-<nav x-data="{ open: false }" class="text-slate-600 hover:text-indigo-600 transition-colors">
+<nav x-data="{ open: false }" class="text-slate-600 hover:text-indigo-600">
 
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+    <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto ">
 
         <div class="grid grid-row-1 grid-cols-2">
 
-            <div class="my-auto">
+            <div class="my-auto ">
                 <div class="hidden sm:flex">
                     <!-- Navigation Links -->
                     <div class="hidden sm:-my-px sm:flex">
@@ -164,14 +164,14 @@
 
                     @if (Route::has('login'))
                         <a href="{{ route('login') }}"
-                            class="inline-block my-auto px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
+                            class="inline-block my-auto px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm sm:text-base md:text-lg leading-normal">
                             Log in
                         </a>
                     @endif
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                            class="inline-block my-auto px-5 py-1.5 dark:text-[#EDEDEC] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                            class="inline-block my-auto px-5 py-1.5 dark:text-[#EDEDEC] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm sm:text-base md:text-lg leading-normal">
                             Register
                         </a>
                     @endif

@@ -46,7 +46,8 @@
                                         alt="ava">
                                     <a class="my-auto me-2"
                                         href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
-                                    <p class="hidden sm:inline my-auto whitespace-nowrap">({{ $topic->posts_count }} mes.)</p>
+                                    <p class="hidden sm:inline my-auto whitespace-nowrap">({{ $topic->posts_count }}
+                                        mes.)</p>
                                 </div>
                             </td>
 
@@ -82,10 +83,12 @@
     </div>
 
     <x-slot name="footer">
-        <div class="w-full border-t-2 border-indigo-500 flex flex-row justify-between px-5 py-2">
-            <p>Topics: {{ $topics->total() }}</p>
-            <div>{{ $topics->links() }}</div>
-            <p>Posts: {{ $postsCount }}</p>
+        <div class="w-full bg-white/70 border-b border-t">
+            <div class="max-w-7xl mx-auto  border-slate-200  backdrop-blur flex justify-between px-4 py-3">
+                <p>Topics: {{ $topics->total() }}</p>
+                <div>{{ $topics->links() }}</div>
+                <p>Posts: {{ $postsCount }}</p>
+            </div>
         </div>
     </x-slot>
 </x-app-layout>

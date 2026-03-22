@@ -6,6 +6,17 @@
     </x-slot>
 
     <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
+
+        <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 xl:w-2/5 mx-auto">
+            <form method="GET" action="{{ route('users.index') }}" class="mb-4 flex flex-row">
+                <input type="text" name="search" placeholder="Search user..."
+                    class="border rounded px-3 py-2 w-full me-1">
+                <x-button color="slate" value="{{ request('search') }}">
+                    Search
+                </x-button>
+            </form>
+        </div>
+
         <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
             <table class="w-full text-sm text-left text-slate-500 flex flex-col">
                 <thead class="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200  w-full">
@@ -51,7 +62,11 @@
         
     </div>
     <x-slot name="footer">
-        <div class="mx-auto py-3">{{ $users->links() }}</div>
+        <div class="w-full bg-white/70 border-b border-t">
+            <div class="max-w-7xl mx-auto border-slate-200  backdrop-blur flex justify-between px-4 py-3">
+                <div class="mx-auto">{{ $users->links() }}</div>
+            </div>
+        </div>
     </x-slot>
 
 
