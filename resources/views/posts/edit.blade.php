@@ -74,7 +74,7 @@
                     @if ($post->picture)
                         <div class="mb-3 p-2">
                             <p class="text-sm text-gray-500">Current image:</p>
-                            <img id="topicImg_preview" src="{{ asset('storage/' . $post->picture) }}" class="max-w-xs mx-auto">
+                            <img id="topicImg_preview" src="{{ asset($post->picture) }}" class="max-w-xs mx-auto">
                         </div>
                     @endif
 

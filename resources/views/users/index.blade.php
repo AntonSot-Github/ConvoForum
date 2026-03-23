@@ -7,15 +7,18 @@
 
     <div class="max-w-4xl mx-auto px-4 space-y-4 pb-6">
 
-        <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 xl:w-2/5 mx-auto">
-            <form method="GET" action="{{ route('users.index') }}" class="mb-4 flex flex-row">
-                <input type="text" name="search" placeholder="Search user..."
-                    class="border rounded px-3 py-2 w-full me-1">
-                <x-button color="slate" value="{{ request('search') }}">
-                    Search
-                </x-button>
-            </form>
-        </div>
+        @if ($users->isNotEmpty())
+            <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 xl:w-2/5 mx-auto">
+                <form method="GET" action="{{ route('users.index') }}" class="mb-4 flex flex-row">
+                    <input type="text" name="search" placeholder="Search user..."
+                        class="border rounded px-3 py-2 w-full me-1">
+                    <x-button color="slate" value="{{ request('search') }}">
+                        Search
+                    </x-button>
+                </form>
+            </div>
+        @endif
+
 
         <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
             <table class="w-full text-sm text-left text-slate-500 flex flex-col">
@@ -28,12 +31,13 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($users as $user)
-                        <tr class="bg-white transition-colors grid grid-cols-3 grid-rows-1 py-2 px-4 align-content-center">
+                        <tr
+                            class="bg-white transition-colors grid grid-cols-3 grid-rows-1 py-2 px-4 align-content-center">
                             <td class="justify-self-start my-auto">
                                 <div class="flex flex-row justify-start">
                                     <img class="size-5 me-3 rounded-full my-auto"
                                         src="{{ asset('storage/' . $user->avatar) }}" alt="ava">
-                                    <a href="{{ route('users.show', $user)}}" class="my-auto">{{ $user->name }}</a>
+                                    <a href="{{ route('users.show', $user) }}" class="my-auto">{{ $user->name }}</a>
                                 </div>
 
                             </td>
@@ -57,9 +61,9 @@
                 </tbody>
             </table>
         </div>
-        
 
-        
+
+
     </div>
     <x-slot name="footer">
         <div class="w-full bg-white/70 border-b border-t">

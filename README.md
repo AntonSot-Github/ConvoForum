@@ -69,9 +69,9 @@ php artisan migrate
 
 ---
 
-Screenshots
+## Screenshots
 
-*Add screenshots of your application here (home page, admin panel, profile, etc.)*
+### 
 
 ---
 

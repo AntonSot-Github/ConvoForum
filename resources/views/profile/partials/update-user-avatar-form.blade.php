@@ -15,7 +15,7 @@
         <div>
             <div class="size-24 mx-auto mb-6">
                 @if ($user->avatar)
-                    <img id="avatar_preview" class="rounded-xl mb-6" src="{{ asset('storage/' . $user->avatar) }}" alt="avatar-image">
+                    <img id="avatar_preview" class="rounded-xl mb-6" src="{{ asset($user->avatar) }}" alt="avatar-image">
                 @endif
             </div>
             <x-input-label for="avatar_input" :value="__('Avatar')" />

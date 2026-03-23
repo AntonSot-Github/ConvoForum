@@ -19,20 +19,21 @@
         @endauth
 
         {{-- Search post --}}
-        <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 mx-auto">
-            <form method="GET" action="{{ route('home.index') }}" class="mb-4 flex flex-row">
-                <input type="text" name="search" placeholder="Search topics..."
-                    class="border border-slate-200 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition me-1">
-                <x-button color="slate" value="{{ request('search') }}">
-                    Search
-                </x-button>
-            </form>
-        </div>
+        @if ($posts->total() !== 0)
+            <div class="w-full sm:w-2/3 md:w-3/5 lg:w-2/3 mx-auto">
+                <form method="GET" action="{{ route('home.index') }}" class="mb-4 flex flex-row">
+                    <input type="text" name="search" placeholder="Search topics..."
+                        class="border border-slate-200 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition me-1">
+                    <x-button color="slate" value="{{ request('search') }}">
+                        Search
+                    </x-button>
+                </form>
+            </div>
+        @endif
 
         {{-- Posts --}}
         @forelse ($posts as $post)
-            <div
-                class="flex flex-col bg-white/80 border-2 rounded-2xl shadow-lg">
+            <div class="flex flex-col bg-white/80 border-2 rounded-2xl shadow-lg">
 
                 {{-- Topic of post --}}
                 <h2
@@ -46,8 +47,8 @@
                         <input type="checkbox" id="zoom-{{ $post->id }}" class="hidden peer">
 
                         <label for="zoom-{{ $post->id }}" class="cursor-zoom-in block">
-                            <img src="{{ asset('storage/' . $post->picture) }}"
-                                class="max-w-full hover:opacity-90 transition-opacity" alt="img">
+                            <img src="{{ asset($post->picture) }}"
+                                class="max-w-full mx-auto hover:opacity-90 transition-opacity" alt="img">
                         </label>
 
                         <div
@@ -61,7 +62,7 @@
                                 </svg>
                             </label>
 
-                            <img src="{{ asset('storage/' . $post->picture) }}"
+                            <img src="{{ asset($post->picture) }}"
                                 class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl rounded-lg"
                                 alt="fullscreen-img">
                         </div>
@@ -85,7 +86,7 @@
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                     <div @class(['flex flex-row', 'text-green-500' => Auth::user()->isAdmin()])>
                                         <img class="size-6 me-2 rounded-full"
-                                            src="{{ asset('storage/' . ($post->user->avatar ?? 'avatars/av_def.png')) }}"
+                                            src="{{ asset($post->user->avatar ?? 'avatars/av_def.png') }}"
                                             alt="Avatar-img">
 
                                         <p class="my-auto text-lg">{{ $post->author_name }}</p>
@@ -125,7 +126,7 @@
                     @else
                         <div class="flex flex-row">
                             <img class="size-6 me-2 rounded-full"
-                                src="{{ asset('storage/' . ($post->user->avatar ?? 'avatars/av_def.png')) }}"
+                                src="{{ asset($post->user->avatar ?? 'avatars/av_def.png') }}"
                                 alt="Avatar-img">
                             <p class="my-auto">{{ $post->author_name }}</p>
                         </div>

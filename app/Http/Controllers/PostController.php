@@ -57,6 +57,7 @@ class PostController extends Controller
 
             // save new one
             $imagePath = $request->file('userPicture')->store('post-images', 'public');
+            $imagePath = 'storage/' . $imagePath;
         }
 
         $post->update([
@@ -87,6 +88,7 @@ class PostController extends Controller
         if ($request->hasFile('userPicture')) {
             $imagePath = $request->file('userPicture')
                 ->store('post-images', 'public');
+            $imagePath = 'storage/' . $imagePath;
         }
 
         // Creation post

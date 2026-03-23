@@ -95,7 +95,7 @@
 
         </div>
 
-        
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
 
@@ -149,7 +149,7 @@
                             "<img id='postPicture_preview' class='mx-auto mt-2 rounded-lg border w-auto h-auto shadow-sm' alt='Preview'>"
                         );
                         previewPicture = document.getElementById('postPicture_preview');
-                        
+
                     }
 
                     //Change the label text after receiving the image file
@@ -164,6 +164,6 @@
         </script>
     @endsection
 
-
+    <x-slot name="footer"></x-slot>
 
 </x-app-layout>

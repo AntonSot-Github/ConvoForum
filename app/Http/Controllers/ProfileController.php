@@ -59,13 +59,14 @@ class ProfileController extends Controller
         if ($request->hasFile('avatar')) {
 
             //Delete the old user's avatar if it isn't default
-            if ($user->avatar && $user->avatar !== 'avatars/av_def.png') {
+            if ($user->avatar && $user->avatar !== 'storage/avatars/av_def.png') {
                 Storage::disk('public')->delete($user->avatar);
             }
 
             //Save new avatar-image
             $imagePath = $request->file('avatar')
                 ->store('avatars', 'public');
+            $imagePath = 'storage/'. $imagePath;
 
             //Update DB
             $user->update([
