@@ -7,5 +7,5 @@ $classes = ($active ?? false)
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
-    <span class="text-sm sm:text-base md:text-lg">{{ $slot }}</span>
+    <span class="text-sm sm:text-base md:text-lg truncate md:max-w-21">{{ $slot }}</span>
 </a>

@@ -37,12 +37,12 @@
 
 
         <!-- Page Content -->
-        <main class="w-full md:w-3/4 mx-auto grow mt-3">
+        <main class="w-full md:w-3/4 mx-auto grow mt-4">
 
             {{-- Messages about success or error --}}
-            <x-flash-message />
-
-            {{ $slot }}
+            <x-flash-message></x-flash-message>
+                {{ $slot }}
+            
 
             @yield('content')
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 use App\Models\User;
 use App\Models\Topic;
 
@@ -11,6 +12,7 @@ use App\Models\Topic;
  */
 class PostFactory extends Factory
 {
+
     /**
      * Define the model's default state.
      *

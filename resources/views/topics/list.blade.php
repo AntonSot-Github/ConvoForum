@@ -23,7 +23,7 @@
         {{-- List of topics --}}
         <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
 
-            @forelse ($topics as $topic)
+            
                 <table class="w-full text-sm text-left text-slate-500 flex flex-col">
                     <thead class="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200  w-full">
                         <tr
@@ -38,19 +38,22 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-
+                        @foreach ($topics as $topic)
 
                         <tr
                             class="bg-white transition-colors grid {{ auth()->user()?->isAdmin() ? 'grid-cols-3' : 'grid-cols-2' }} grid-rows-1 py-2 px-4 align-content-center">
                             <td class="justify-self-start my-auto">
                                 <div class="flex flex-row ">
                                     <img class="size-8 me-2 rounded-full"
-                                        src="{{ asset('storage/' . ($topic->user->avatar ?? 'avatars/av_def.png')) }}"
-                                        alt="ava">
+                                        src="{{ asset($topic->user->avatar ?? 'avatars/av_def.png') }}" alt="ava">
                                     <a class="my-auto me-2"
                                         href="{{ route('topic.show', $topic) }}">{{ $topic->title }}</a>
-                                    <p class="hidden sm:inline my-auto whitespace-nowrap">({{ $topic->posts_count }}
-                                        mes.)</p>
+                                    @if ($topic->posts_count != 0)
+                                        <p class="hidden sm:inline my-auto whitespace-nowrap">
+                                            ({{ $topic->posts_count }}
+                                            mes.)</p>
+                                    @endif
+
                                 </div>
                             </td>
 
@@ -73,12 +76,17 @@
                                 </td>
                             @endif
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
-            @empty
-                <p class="text-center py-3"><i>There are no any topics yet</i></p>
-            @endforelse
+         
+                
+            
         </div>
+        @if (!$topics->isNotEmpty())
+            <p class="text-center py-3"><i>There are no any topics yet</i></p>
+        @endif
+        
     </div>
 
     <x-slot name="footer">

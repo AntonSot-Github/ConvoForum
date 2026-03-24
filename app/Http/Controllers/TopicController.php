@@ -17,7 +17,7 @@ class TopicController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        $topics = $query->paginate(25)->withQueryString();
+        $topics = $query->paginate(8)->withQueryString();
         $postsCount = Post::count();
         return view('topics.list', compact('topics', 'postsCount'));
     }

@@ -32,7 +32,7 @@
 
                         @if ($topic = request()->route('topic'))
                             <x-nav-link :href="route('topic.show', $topic)" :active="request()->routeIs('topic.show')">
-                                {{ __("Posts on $topic->title") }}
+                                {{ __("$topic->title") }}
                             </x-nav-link>
                         @endif
 

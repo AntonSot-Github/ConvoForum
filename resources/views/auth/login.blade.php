@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-session-status class="mb-4" :status="session('status')"/>
 
     <div class="w-full sm:w-2/3 md:w-1/2 lg:1/3 xl:w-2/5 2xl:w-1/4 mx-auto p-3">
         <form method="POST" action="{{ route('login') }}">

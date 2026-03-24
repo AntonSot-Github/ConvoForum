@@ -71,7 +71,7 @@
 
                 {{-- Post-text --}}
                 <div class="mb-3 p-6">
-                    <pre class="text-slate-700 leading-relaxed whitespace-pre-wrap">{{ $post->content }}</pre>
+                    <pre class="text-slate-700 leading-relaxed whitespace-pre-line">{{ $post->content }}</pre>
                 </div>
 
                 {{-- User's name and publication date --}}

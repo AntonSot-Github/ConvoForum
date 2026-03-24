@@ -29,7 +29,7 @@ Tech Stack
 * **Blade**
 * **Tailwind CSS**
 * **Laravel Breeze**
-* Native JavaScript:
+* **Native JavaScript:
   * image preview before upload
   * dynamic form behavior (topic selection)
 
@@ -59,19 +59,47 @@ cd convoforum
 
 composer install
 npm install
-npm run dev
 
 cp .env.example .env
 php artisan key:generate
 
-php artisan migrate
+php artisan migrate --seed
+
+php artisan storage:link
+
+npm run dev
+php artisan serve
+
 ```
+
+---
+
+## Demo Admin Account
+
+Email: admin@test.com  
+Password: password
 
 ---
 
 ## Screenshots
 
-### 
+### Main page with posts
+![Home](docs/home.png)
+
+### Edit profile page
+![Profile](docs/profile.png)
+
+### List of topics 
+![Topics](docs/topics_list.png)
+
+### List of users
+![Users](docs/users_list.png)
+
+### Post create page
+![CreatePost](docs/post_create.png)
+
+### Post image view
+![PostImgView](docs/post_img_view.png)
 
 ---
 
@@ -79,12 +107,11 @@ Future Improvements
 
 * Advanced search (full-text / external search engine)
 * Notifications system
-* Likes / reactions on posts
 * Real-time updates (WebSockets)
 
 ---
 
-Developed by **Anton**
+Developed by **AntonShv**
 
 ---
 

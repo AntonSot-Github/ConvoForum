@@ -48,9 +48,9 @@ class UserController extends Controller
         }
 
         $userAva = $user->avatar;
-        if ($userAva && $userAva !== 'avatars/av_def.png') {
+        if ($userAva && $userAva !== 'storage/avatars/av_def.png') {
             Storage::disk('public')->delete($userAva);
-            $user->update(['avatar' => 'avatars/av_def.png']);
+            $user->update(['avatar' => 'storage/avatars/av_def.png']);
             
         }
 

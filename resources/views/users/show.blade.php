@@ -7,7 +7,7 @@
 
     <div
         class="max-w-4xl mx-auto px-4 space-y-4 pb-6 flex flex-col bg-white border border-gray-400 rounded-2xl shadow-xl p-4 items-center">
-        <img class="size-20 rounded-full my-auto" src="{{ asset('storage/' . $user->avatar) }}" alt="ava">
+        <img class="size-20 rounded-full my-auto" src="{{ asset($user->avatar) }}" alt="ava">
         <h1 class="text-3xl">{{ $user->name }}'s profile</h1>
         <div class="flex flex-row">
             <p class="me-3">{{ $user->email }}</p>
@@ -24,9 +24,13 @@
 
         <p>Registered &nbsp;&#8212;&nbsp; {{ $user->created_at->diffForHumans(['parts' => 2]) }}</p>
 
-        <x-button color="red" onclick="return confirm('Are you sure?')">
-            Delete user
-        </x-button>
+        {{-- Show delete button if the user is not one of admins --}}
+        @if (Auth::user()->isAdmin() && !$user->isAdmin() && Auth::user()->id !== $user->id)
+            <x-button color="red" onclick="return confirm('Are you sure?')">
+                Delete user
+            </x-button>
+        @endif
+
 
     </div>
 

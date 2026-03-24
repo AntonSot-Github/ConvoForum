@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        //Check if the users table is empty
+        //Check if the user will be first in the users table
         $isFirstUser = User::count() === 0;
 
         //If empty, first user becomes admin

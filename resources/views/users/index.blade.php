@@ -35,9 +35,9 @@
                             class="bg-white transition-colors grid grid-cols-3 grid-rows-1 py-2 px-4 align-content-center">
                             <td class="justify-self-start my-auto">
                                 <div class="flex flex-row justify-start">
-                                    <img class="size-5 me-3 rounded-full my-auto"
-                                        src="{{ asset('storage/' . $user->avatar) }}" alt="ava">
-                                    <a href="{{ route('users.show', $user) }}" class="my-auto">{{ $user->name }}</a>
+                                    <img class="size-6 me-3 rounded-full my-auto"
+                                        src="{{ asset($user->avatar) }}" alt="ava">
+                                    <a href="{{ route('users.show', $user) }}" class="my-auto text-sm sm:text-base md:text-lg">{{ $user->name }}</a>
                                 </div>
 
                             </td>
